@@ -7,7 +7,8 @@ const path = require('path')
 
 const view = { 
     filename: argv._[0],
-    date: moment().format('MMMM Do, YYYY') 
+    author: argv.a || 'Tobias Bergkist', 
+    date: moment().format('MMMM Do, YYYY')
 }
 
 const readInput = name => fs.readFileSync(path.resolve(__dirname, name)).toString('utf8')
