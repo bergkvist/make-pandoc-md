@@ -1,0 +1,27 @@
+{
+  "name": "@bergkvist/make-pandoc-md",
+  "version": "1.0.0",
+  "description": "npm script for creating a markdown template: `[filename].md` + `Makefile` -> `[filename].pdf`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bergkvist/make-pandoc-md.git"
+  },
+  "bin": {
+    "make-pandoc-md": "index.js"
+  },
+  "author": "Tobias Bergkvist",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bergkvist/make-pandoc-md/issues"
+  },
+  "homepage": "https://github.com/bergkvist/make-pandoc-md#readme",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "mustache": "^3.0.1",
+    "yargs": "^13.2.2"
+  }
+}
