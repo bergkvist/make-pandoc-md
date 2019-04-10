@@ -4,7 +4,9 @@
   "description": "npm script for creating a markdown template: `[filename].md` + `Makefile` -> `[filename].pdf`",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "link": "sudo npm link",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",

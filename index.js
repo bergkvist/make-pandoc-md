@@ -15,14 +15,12 @@ const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(),
 if (view.filename) {
     const mdfile   = readInput('filename.md.mustache')
     const makefile = readInput('Makefile.mustache')
-    
-    console.log(mdfile)
-    
+
     writeOutput(`${view.filename}.md`, mustache.render(mdfile, view))
-    writeOutput(`Makefile`,       mustache.render(makefile, view))
+    writeOutput(`Makefile`,            mustache.render(makefile, view))
+
+    console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
 } else {
     console.log('Usage: make-pandoc-md [filename]')
     console.log('    NOTE: [filename] should not contain extensions')
 }
-
-
