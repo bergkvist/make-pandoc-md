@@ -23,7 +23,7 @@ const readInput = name => fs.readFileSync(path.resolve(__dirname, name)).toStrin
 const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(), name), data)
 
 try {
-    if (argv.a && argv.author) throw new Error('You cannot use both -a and --author together')
+    if (argv.a && argv.author) throw new Error('You cannot use -a and --author together')
     if (!view.filename)        throw new Error('You must supply a filename')
 } catch (error) {
     console.log(`Error: ${error.message}\n`)
