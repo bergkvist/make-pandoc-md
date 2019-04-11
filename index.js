@@ -23,18 +23,18 @@ const view = {
 const readInput = name => fs.readFileSync(path.resolve(__dirname, name)).toString('utf8')
 const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(), name), data)
 
-if (view.filename) {
-    if (argv.a && argv.author) {
-        showUsage({message: '-a not allowed with --author'})
-    } else {
-        const mdfile   = readInput('filename.md.mustache')
-        const makefile = readInput('Makefile.mustache')
-    
-        writeOutput(`${view.filename}.md`, mustache.render(mdfile, view))
-        writeOutput(`Makefile`,            mustache.render(makefile, view))
-    
-        console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
-    }
-} else {
-    showUsage({message: 'Filename not supplied'})
+try {
+    if (argv.a && argv.author) throw new Error('You cannot use both -a and --author together')
+    if (!view.filename)        throw new Error('You must supply a filename')
+} catch (error) {
+    showUsage(error)
+    process.exit(1)
 }
+
+const mdfile   = readInput('filename.md.mustache')
+const makefile = readInput('Makefile.mustache')
+
+writeOutput(`${view.filename}.md`, mustache.render(mdfile, view))
+writeOutput(`Makefile`,            mustache.render(makefile, view))
+
+console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
