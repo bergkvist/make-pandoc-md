@@ -1,6 +1,6 @@
 {
   "name": "@bergkvist/mdmake",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "npm script for creating a markdown template: `[filename].md` + `Makefile` -> `[filename].pdf`",
   "main": "index.js",
   "scripts": {

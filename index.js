@@ -1,40 +1,32 @@
 #! /usr/bin/env node
 const mustache = require('mustache')
 const moment = require('moment')
-const { argv } = require('yargs')
 const fs = require('fs')
 const path = require('path')
+const { argv } = require('yargs')
+    .usage('$0 <project-name> [options]', '', yargs => {
+        yargs.positional('<project-name>', {
+            describe: 'Will be used for naming the markdown/pdf files',
+            type: 'string'
+        })
+    })
+    .option('author', {
+        alias: 'a',
+        describe: 'project author',
+        default: 'Tobias Bergkvist'
+    })
 
-const showUsage = () => {
-    console.log('Usage:')
-    console.log('    mdmake [filename] [options]')
-    console.log('    NOTE: [filename] should not contain extensions')
-    console.log('Options:')
-    console.log('    --author, -a "author name"')
-}
-
-try {
-    if (!argv._[0])            throw new Error('You must supply a filename')
-    if (argv.a && argv.author) throw new Error('You cannot use -a and --author together')
-} catch (error) {
-    console.log(`Error: ${error.message}\n`)
-    showUsage()
-    process.exit(1)
-}
-
-const view = { 
-    filename: argv._[0],
-    author: argv.author || argv.a || 'Tobias Bergkvist', 
+const data = {
+    filename: argv['project-name'],
+    author: argv.author, 
     date: moment().format('MMMM Do, YYYY')
 }
 
 const readInput = name => fs.readFileSync(path.resolve(__dirname, name)).toString('utf8')
-const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(), name), data)
+const writeOutput = (name, template, data) => fs.writeFileSync(path.resolve(process.cwd(), name), mustache.render(template, data))
+const createFileFromTemplate = data => ({ output, input }) => writeOutput(output, readInput(input), data)
 
-const mdfile   = readInput('filename.md.mustache')
-const makefile = readInput('Makefile.mustache')
+createFileFromTemplate (data) ({ output: `${data.filename}.md`, input: `filename.md.mustache` })
+createFileFromTemplate (data) ({ output: `Makefile`           , input: `Makefile.mustache`    })
 
-writeOutput(`${view.filename}.md`, mustache.render(mdfile, view))
-writeOutput(`Makefile`,            mustache.render(makefile, view))
-
-console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
+console.log(`Successfully created files (in this folder): \n * Makefile \n * ${data.filename}.md`)
