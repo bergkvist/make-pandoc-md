@@ -5,7 +5,8 @@ const { argv } = require('yargs')
 const fs = require('fs')
 const path = require('path')
 
-const printInstructions = () => {
+const showUsage = ({ message }) => {
+    if (message) console.log(`Error: ${message}\n`)
     console.log('Usage:')
     console.log('    mdmake [filename] [options]')
     console.log('    NOTE: [filename] should not contain extensions')
@@ -24,8 +25,7 @@ const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(),
 
 if (view.filename) {
     if (argv.a && argv.author) {
-        console.log('-a not allowed with --author')
-        printInstructions()
+        showUsage({message: '-a not allowed with --author'})
     } else {
         const mdfile   = readInput('filename.md.mustache')
         const makefile = readInput('Makefile.mustache')
@@ -36,6 +36,5 @@ if (view.filename) {
         console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
     }
 } else {
-    console.log('Filename not supplied')
-    printInstructions()
+    showUsage({message: 'Filename not supplied'})
 }
