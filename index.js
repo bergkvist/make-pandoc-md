@@ -5,8 +5,7 @@ const { argv } = require('yargs')
 const fs = require('fs')
 const path = require('path')
 
-const showUsage = ({ message }) => {
-    if (message) console.log(`Error: ${message}\n`)
+const showUsage = () => {
     console.log('Usage:')
     console.log('    mdmake [filename] [options]')
     console.log('    NOTE: [filename] should not contain extensions')
@@ -27,7 +26,8 @@ try {
     if (argv.a && argv.author) throw new Error('You cannot use both -a and --author together')
     if (!view.filename)        throw new Error('You must supply a filename')
 } catch (error) {
-    showUsage(error)
+    console.log(`Error: ${error.message}\n`)
+    showUsage()
     process.exit(1)
 }
 
