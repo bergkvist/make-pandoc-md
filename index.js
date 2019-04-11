@@ -7,7 +7,7 @@ const path = require('path')
 
 const view = { 
     filename: argv._[0],
-    author: argv.author || argv.a || 'Tobias Bergkist', 
+    author: argv.author || argv.a || 'Tobias Bergkvist', 
     date: moment().format('MMMM Do, YYYY')
 }
 
