@@ -2,7 +2,7 @@ npm script for creating a markdown template: `[filename].md` + `Makefile` -> `[f
 
 # Creating a project
 ```bash
-[some-folder]$ npx @bergkvist/make-pandoc-md [filename]
+[some-folder]$ npx @bergkvist/mdmake [filename]
 ```
 
 This will create a `Makefile` as well as `[filename].md` in the current folder.
@@ -18,6 +18,9 @@ This will create a `Makefile` as well as `[filename].md` in the current folder.
 
 # Preview pdf (with automatic updates) in zathura pdf viewer.
 [some-folder]$ make preview
+
+# Open file for editing in gedit
+[some-folder]$ make edit
 ```
 
 # Requirements
@@ -26,4 +29,5 @@ This will create a `Makefile` as well as `[filename].md` in the current folder.
 * `zathura` (for opening pdf-preview)
 * `entr` (for watching file changes)
 * `make` (for using the `make` commands)
+* `gedit` (for using `make edit`)
 
