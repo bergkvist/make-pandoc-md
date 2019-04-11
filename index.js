@@ -23,6 +23,9 @@ if (view.filename) {
 
     console.log(`Successfully created files: 'Makefile', '${view.filename}.md' in current folder.`)
 } else {
-    console.log('Usage: make-pandoc-md [filename]')
+    console.log('Usage:')
+    console.log('    mdmake [filename] [options]')
     console.log('    NOTE: [filename] should not contain extensions')
+    console.log('Options:')
+    console.log('    --author, -a "author name"')
 }
