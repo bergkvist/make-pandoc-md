@@ -11,3 +11,6 @@ preview:
 
 watch:
 	echo '$(IN)' | entr -c make
+
+edit:
+	nohup gedit '$(IN)' >/dev/null &

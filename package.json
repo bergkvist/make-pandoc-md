@@ -1,19 +1,19 @@
 {
-  "name": "@bergkvist/make-pandoc-md",
+  "name": "@bergkvist/mdmake",
   "version": "1.0.0",
   "description": "npm script for creating a markdown template: `[filename].md` + `Makefile` -> `[filename].pdf`",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "link": "sudo npm link",
-    "publish": "npm publish"
+    "publish": "npm publish --access=public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bergkvist/make-pandoc-md.git"
   },
   "bin": {
-    "make-pandoc-md": "index.js"
+    "mdmake": "index.js"
   },
   "author": "Tobias Bergkvist",
   "license": "ISC",

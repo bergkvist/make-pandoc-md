@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const mustache = require('mustache')
 const moment = require('moment')
 const { argv } = require('yargs')
