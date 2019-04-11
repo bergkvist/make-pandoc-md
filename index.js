@@ -13,6 +13,15 @@ const showUsage = () => {
     console.log('    --author, -a "author name"')
 }
 
+try {
+    if (!argv._[0])            throw new Error('You must supply a filename')
+    if (argv.a && argv.author) throw new Error('You cannot use -a and --author together')
+} catch (error) {
+    console.log(`Error: ${error.message}\n`)
+    showUsage()
+    process.exit(1)
+}
+
 const view = { 
     filename: argv._[0],
     author: argv.author || argv.a || 'Tobias Bergkvist', 
@@ -21,15 +30,6 @@ const view = {
 
 const readInput = name => fs.readFileSync(path.resolve(__dirname, name)).toString('utf8')
 const writeOutput = (name, data) => fs.writeFileSync(path.resolve(process.cwd(), name), data)
-
-try {
-    if (argv.a && argv.author) throw new Error('You cannot use -a and --author together')
-    if (!view.filename)        throw new Error('You must supply a filename')
-} catch (error) {
-    console.log(`Error: ${error.message}\n`)
-    showUsage()
-    process.exit(1)
-}
 
 const mdfile   = readInput('filename.md.mustache')
 const makefile = readInput('Makefile.mustache')
